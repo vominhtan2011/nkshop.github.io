@@ -310,12 +310,23 @@
         padding:7px 14px;
         font-size:12px;
       }
+      
+      /* --- CHỈNH SỬA CHO 3 TAB SẢN PHẨM NẰM TRÊN 1 DÒNG (CUỘN NGANG) --- */
       .tabs{
-        flex-direction:column;
+        flex-direction:row; /* Đổi thành row để nằm trên 1 dòng */
+        flex-wrap: nowrap; /* Ngăn chặn xuống dòng */
+        overflow-x: auto; /* Cho phép cuộn ngang nếu không đủ chỗ */
+        padding: 6px; /* Giảm padding cho mobile */
+        justify-content: flex-start; /* Căn tab về bên trái */
       }
       .tab-btn{
-        width:100%;
+        min-width: fit-content; /* Cho nút co lại theo nội dung */
+        width: auto; /* Bỏ width: 100% */
+        padding: 10px 14px; /* Giảm padding cho nhỏ gọn */
+        flex-shrink: 0; /* Ngăn các nút bị bóp quá mức */
       }
+      /* --- KẾT THÚC CHỈNH SỬA TAB --- */
+      
       .grid{
         grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
         gap:14px;
