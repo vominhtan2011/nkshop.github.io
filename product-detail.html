@@ -124,6 +124,18 @@
     .price { color:var(--accent); font-weight:700; font-size:18px; margin:8px 0; }
     .actions { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
 
+    /* THÊM STYLE CHO KHỐI NÚT ĐIỀU HƯỚNG MỚI */
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 12px;
+    }
+    /* KẾT THÚC THÊM STYLE */
+
     footer{
       margin-top:50px;
       text-align:center;
@@ -197,6 +209,11 @@
         padding: 8px 14px;
         font-size: 13px;
       }
+
+      /* Tối ưu nút điều hướng trên mobile */
+      .nav-actions .btn {
+        flex-grow: 1;
+      }
     }
   </style>
 </head>
@@ -215,12 +232,11 @@
   </header>
 
   <main class="container">
-    <div class="actions" style="margin-top: 16px; justify-content: flex-start; display: none; @media (min-width: 769px) { display: flex; }">
+    <div class="nav-actions">
         <a class="btn btn-phone" href="index.html">← Trang chủ</a>
         <a class="btn btn-phone" href="index.html#nhua">🛍️ Sản phẩm nhựa</a>
         <a class="btn btn-phone" href="index.html#khan-giay">🧻 Khăn giấy</a>
     </div>
-
     <section class="product-detail">
       <div class="product-card">
         <img id="product-image" src="images/placeholder.jpg" alt="Sản phẩm">
@@ -231,11 +247,7 @@
           <div class="price" id="product-price">Giá: Liên hệ</div>
           <p id="product-desc">Mô tả chi tiết sản phẩm sẽ được hiển thị tại đây: chất liệu, kích thước, công dụng, và thông tin thêm.</p>
         </div>
-        <div class="actions" style="margin-top: 24px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
-          <a class="btn btn-phone" href="tel:0387404109">📞 Gọi đặt hàng</a>
-          <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">💬 Chat Zalo</a>
         </div>
-      </div>
     </section>
   </main>
 
