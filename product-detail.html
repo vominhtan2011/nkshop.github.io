@@ -125,7 +125,6 @@
       background:#ffffff;
     }
     .info h2 { font-size:24px; margin-bottom:10px; }
-    .product-group { color:var(--muted); font-weight:500; margin-bottom:10px; }
     .price { color:var(--accent); font-weight:700; font-size:18px; margin:8px 0; }
     .actions { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
 
@@ -158,6 +157,8 @@
         </div>
         <div class="cta">
           <a class="btn btn-phone" href="index.html">← Trang chủ</a>
+          <a class="btn btn-phone" href="index.html#nhua">🛍️ Sản phẩm nhựa</a>
+          <a class="btn btn-phone" href="index.html#khan-giay">🧻 Khăn giấy</a>
           <a class="btn btn-phone" href="tel:0387404109">📞 0387 404 109</a>
           <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">💬 Zalo</a>
         </div>
@@ -268,7 +269,6 @@
       const descEl = document.getElementById("product-desc");
       const imgEl = document.getElementById("product-image");
       const priceEl = document.getElementById("product-price");
-      const groupEl = document.getElementById("product-group");
 
       nameEl.textContent = product.name;
       descEl.textContent = product.description || "Đang cập nhật thông tin sản phẩm.";
@@ -276,7 +276,6 @@
       imgEl.alt = product.name;
       const priceText = product.price ? product.price : "Liên hệ";
       priceEl.textContent = `Giá: ${priceText}`;
-      const categoryLabel = getCategoryLabel(product.categoryKey);
       document.title = `${product.name} | Chi tiết sản phẩm`;
     })();
   </script>
