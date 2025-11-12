@@ -63,11 +63,7 @@
       color:rgba(255,255,255,0.9);
       font-size:13px;
     }
-    .cta{
-      margin-left:auto;
-      display:flex;
-      gap:12px;
-    }
+    /* Đã xóa .cta cũ */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -139,9 +135,68 @@
       box-shadow:0 -2px 10px rgba(0,0,0,0.05);
       font-size:14px;
     }
+    /* --- CSS CHO POP-UP CỐ ĐỊNH --- */
+    #contact-popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column; 
+      gap: 10px; 
+    }
+    #contact-popup .btn {
+      width: 100%; 
+      justify-content: center;
+      padding: 10px 18px; 
+      font-size: 14px;
+      margin: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+    }
+    /* --- Kết thúc CSS POP-UP --- */
+
     @media (max-width:768px) {
       .product-detail { grid-template-columns:1fr; }
       .product-detail img { height:auto; }
+
+      /* Mobile header optimization */
+      header{padding:8px 12px}
+      .brand{
+        flex-direction:row; 
+        align-items:center;
+        text-align:left; 
+        gap:10px;
+        flex-wrap: nowrap; 
+        justify-content: flex-start;
+      }
+      .brand-text {
+        flex-grow: 1; 
+        text-align: left;
+      }
+      .brand-text h1{
+        font-size:16px;
+        margin:0;
+      }
+      .brand-text p.lead{
+        font-size:10px;
+        margin:4px 0 0;
+      }
+      .logo{
+        width:40px;
+        height:40px;
+        font-size:16px;
+      }
+      /* Tối ưu pop-up trên mobile */
+      #contact-popup {
+        bottom: 12px;
+        right: 12px;
+        padding: 0px;
+        gap: 8px;
+      }
+      #contact-popup .btn{
+        padding: 8px 14px;
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -155,18 +210,17 @@
           <h1>Shop Nhựa gia dụng & Khăn giấy</h1>
           <p class="lead">Chuyên phân phối sỉ & lẻ nhựa gia dụng, khăn giấy - Giao hàng toàn quốc</p>
         </div>
-        <div class="cta">
-          <a class="btn btn-phone" href="index.html">← Trang chủ</a>
-          <a class="btn btn-phone" href="index.html#nhua">🛍️ Sản phẩm nhựa</a>
-          <a class="btn btn-phone" href="index.html#khan-giay">🧻 Khăn giấy</a>
-          <a class="btn btn-phone" href="tel:0387404109">📞 0387 404 109</a>
-          <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">💬 Zalo</a>
-        </div>
       </div>
     </div>
   </header>
 
   <main class="container">
+    <div class="actions" style="margin-top: 16px; justify-content: flex-start; display: none; @media (min-width: 769px) { display: flex; }">
+        <a class="btn btn-phone" href="index.html">← Trang chủ</a>
+        <a class="btn btn-phone" href="index.html#nhua">🛍️ Sản phẩm nhựa</a>
+        <a class="btn btn-phone" href="index.html#khan-giay">🧻 Khăn giấy</a>
+    </div>
+
     <section class="product-detail">
       <div class="product-card">
         <img id="product-image" src="images/placeholder.jpg" alt="Sản phẩm">
@@ -177,6 +231,10 @@
           <div class="price" id="product-price">Giá: Liên hệ</div>
           <p id="product-desc">Mô tả chi tiết sản phẩm sẽ được hiển thị tại đây: chất liệu, kích thước, công dụng, và thông tin thêm.</p>
         </div>
+        <div class="actions" style="margin-top: 24px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+          <a class="btn btn-phone" href="tel:0387404109">📞 Gọi đặt hàng</a>
+          <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">💬 Chat Zalo</a>
+        </div>
       </div>
     </section>
   </main>
@@ -185,6 +243,10 @@
     © <span id="year"></span> Sản Phẩm Nhựa & Khăn Giấy
   </footer>
 
+  <div id="contact-popup">
+    <a class="btn btn-phone" href="tel:0387404109">📞 0387 404 109</a>
+    <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">💬 Zalo</a>
+  </div>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
