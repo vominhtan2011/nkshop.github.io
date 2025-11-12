@@ -288,25 +288,19 @@
           <p class="lead">Chuyên phân phối sỉ & lẻ nhựa gia dụng, khăn giấy - Giao hàng toàn quốc</p>
         </div>
         <div class="cta">
-          <a class="btn btn-phone" href="tel:0387404109">📞 0387 404 109</a>
-          <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">💬 Zalo</a>
+          <a class="btn btn-phone" href="tel:0387404109">0387 404 109</a>
+          <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">Zalo</a>
         </div>
       </div>
     </div>
   </header>
 
   <main class="container">
-  <!-- Phần giới thiệu chính ở đầu trang
-    <section class="hero">
-      <h2>Chuyên phân phối: Nhựa gia dụng & Khăn giấy</h2>
-      <p>Chúng tôi cung cấp đa dạng sản phẩm chất lượng với giá sỉ, giao nhanh, hỗ trợ đặt hàng số lượng lớn.</p>
-    </section> -->
-
     <section>
       <div class="tabs">
-        <button class="tab-btn active" data-tab="noi-bat" onclick="showTab(event,'noi-bat')">⭐ Nổi bật</button>
-        <button class="tab-btn" data-tab="nhua" onclick="showTab(event,'nhua')">🛍️ Sản phẩm nhựa</button>
-        <button class="tab-btn" data-tab="khan-giay" onclick="showTab(event,'khan-giay')">🧻 Khăn giấy</button>
+        <button class="tab-btn active" data-tab="noi-bat" onclick="showTab(event,'noi-bat')">Nổi bật</button>
+        <button class="tab-btn" data-tab="nhua" onclick="showTab(event,'nhua')">Sản phẩm nhựa</button>
+        <button class="tab-btn" data-tab="khan-giay" onclick="showTab(event,'khan-giay')">Khăn giấy</button>
       </div>
 
       <div id="noi-bat" class="tab-content active">
@@ -393,46 +387,34 @@
       });
     }
 
-    // Hàm chuyển tab
     function showTab(event, tabId) {
-      // Ẩn tất cả tab content
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
       });
-      
-      // Xóa active class từ tất cả button
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
       });
-      
-      // Hiển thị tab được chọn
       document.getElementById(tabId).classList.add('active');
-      
-      // Thêm active class cho button tương ứng
       const targetButton = event && event.currentTarget
         ? event.currentTarget
         : document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
       if (targetButton) {
         targetButton.classList.add('active');
       }
-
       if (event) {
         window.location.hash = tabId;
       }
     }
 
-    function applyHashTab(scrollIntoView = false) {
+    function applyHashTab() {
       const hash = window.location.hash.replace('#', '');
       if (!hash) return;
       const targetSection = document.getElementById(hash);
       if (!targetSection) return;
       showTab(null, hash);
-      if (scrollIntoView) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      // Bỏ scrollIntoView để tránh cuộn tự động
     }
 
-    // Khởi tạo
     (async function init() {
       productData = await loadProductData();
       if (productData) {
@@ -441,7 +423,7 @@
       }
     })();
 
-    window.addEventListener('hashchange', () => applyHashTab(false));
+    window.addEventListener('hashchange', () => applyHashTab());
   </script>
 </body>
 </html>
