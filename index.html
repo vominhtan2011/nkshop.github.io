@@ -275,46 +275,43 @@
       .hero h2{
         font-size:24px;
       }
-      /* Tối ưu header mobile - giảm chiều cao */
+      /* Tối ưu header mobile - giữ layout ngang, giảm chiều cao */
       header {
-        padding:4px 10px;
+        padding:6px 10px;
       }
       .container {
         padding:0 10px;
       }
       .brand {
-        gap:8px;
-        flex-direction:column;
-        align-items:flex-start;
+        gap:10px;
+        flex-wrap:nowrap;
+        justify-content:space-between;
       }
       .logo {
-        width:36px;
-        height:36px;
+        width:38px;
+        height:38px;
         font-size:15px;
       }
       .brand-text {
         flex:1;
+        min-width:0;
       }
       .brand-text h1 {
         font-size:15px;
-        margin:0;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
       }
       .brand-text p.lead {
         display:none;
       }
       .cta {
-        width:auto;
-        margin:0;
         gap:8px;
       }
       .btn {
         padding:5px 10px;
         font-size:11px;
         gap:4px;
-      }
-      .btn svg, .btn::before {
-        width:14px;
-        height:14px;
       }
     }
   </style>
