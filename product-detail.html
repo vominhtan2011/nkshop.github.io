@@ -119,11 +119,13 @@
       width:100%;
       border-radius:12px;
       border:1px solid #eee;
-      object-fit:cover;
-      height:420px;
-      background:linear-gradient(135deg,#f0f0f0,#e0e0e0);
+      object-fit:contain;
+      height:auto;
+      aspect-ratio:4/3;
+      background:#ffffff;
     }
     .info h2 { font-size:24px; margin-bottom:10px; }
+    .product-group { color:var(--muted); font-weight:500; margin-bottom:10px; }
     .price { color:var(--accent); font-weight:700; font-size:18px; margin:8px 0; }
     .actions { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
 
@@ -140,7 +142,7 @@
     }
     @media (max-width:768px) {
       .product-detail { grid-template-columns:1fr; }
-      .product-detail img { height:300px; }
+      .product-detail img { height:auto; }
     }
   </style>
 </head>
@@ -152,7 +154,7 @@
         <div class="logo">NK</div>
         <div class="brand-text">
           <h1>Shop Nhựa gia dụng & Khăn giấy</h1>
-          <p class="lead">Chuyên phân phối nhựa gia dụng, khăn giấy sỉ & lẻ, giao hàng toàn quốc</p>
+          <p class="lead">Chuyên phân phối sỉ & lẻ nhựa gia dụng, khăn giấy - Giao hàng toàn quốc</p>
         </div>
         <div class="cta">
           <a class="btn btn-phone" href="index.html">← Trang chủ</a>
@@ -171,6 +173,7 @@
       <div class="product-card">
         <div class="info">
           <h2 id="product-name">Tên sản phẩm</h2>
+          <p id="product-group" class="product-group">Nhóm sản phẩm</p>
           <div class="price" id="product-price">Giá: Liên hệ</div>
           <p id="product-desc">Mô tả chi tiết sản phẩm sẽ được hiển thị tại đây: chất liệu, kích thước, công dụng, và thông tin thêm.</p>
         </div>
@@ -185,64 +188,101 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Lấy ID sản phẩm từ URL (định dạng: category-index), ví dụ: nhua-3
+    // Lấy ID sản phẩm từ URL, ví dụ: nhua-3
     const params = new URLSearchParams(window.location.search);
-    const rawId = params.get('id'); // ví dụ "nhua-3"
+    const rawId = params.get('id');
 
-    // Dữ liệu chi tiết cho từng sản phẩm (đồng bộ tên với index.html)
-    const productDetails = {
-      'noi-bat': [
-        { name: "Chậu nhựa đa năng 10L", desc: "Chậu nhựa dung tích 10L, chất liệu PP bền, dày dặn. Phù hợp giặt giũ, rửa rau củ, vệ sinh nhà cửa. Chịu nhiệt tốt, dễ vệ sinh, không ám mùi." },
-        { name: "Hộp nhựa đựng thực phẩm (set 3)", desc: "Bộ 3 hộp nhựa an toàn thực phẩm, nắp kín chống tràn. Dùng được tủ lạnh, lò vi sóng (không nắp). Thích hợp bảo quản cơm, canh, trái cây." },
-        { name: "Khăn giấy hộp 200 tờ", desc: "Khăn giấy mềm mịn, thấm hút tốt, an toàn cho da. Đóng hộp 200 tờ tiện dụng, phù hợp gia đình và văn phòng." },
-        { name: "Thau nhựa lớn", desc: "Thau nhựa kích thước lớn, vành dày chắc chắn. Phù hợp ngâm giặt, chứa đồ đa mục đích. Nhựa bền, màu sắc tươi sáng." },
-        { name: "Khay nhựa đựng ly", desc: "Khay nhựa chia ngăn gọn gàng, chuyên đựng ly/chén. Dễ vệ sinh, nhẹ, bền, phù hợp quán ăn và gia đình." },
-        { name: "Thùng rác nhựa nắp lật", desc: "Thùng rác nhựa thiết kế nắp lật chống mùi. Dùng trong phòng khách, bếp hoặc văn phòng. Chất liệu bền, màu sắc trang nhã." }
-      ],
-      'nhua': [
-        { name: "Chậu nhựa đa năng 10L", desc: "Chậu nhựa PP 10L, thành dày, chịu lực tốt. Dùng cho sinh hoạt gia đình, nhà hàng, công việc vệ sinh." },
-        { name: "Hộp nhựa đựng thực phẩm (set 3)", desc: "Set 3 hộp kích cỡ khác nhau, nắp khóa kín. Dùng bảo quản đồ khô/ướt, tiện mang theo." },
-        { name: "Thau nhựa lớn", desc: "Thau nhựa dung tích lớn, chống trơn trượt. Dùng ngâm, giặt, rửa rau củ số lượng nhiều." },
-        { name: "Khay nhựa đựng ly", desc: "Khay nhựa chia ô, sắp xếp ly gọn gàng, thoát nước tốt. Hạn chế trầy xước ly chén." },
-        { name: "Ca nhựa 1L", desc: "Ca nhựa dung tích 1L, có vạch đo, tay cầm chắc chắn. Dùng rót nước, pha chế, nấu ăn." },
-        { name: "Thùng rác nhựa nắp lật", desc: "Thùng rác nắp lật êm, hạn chế mùi. Dễ tháo lắp túi rác, vệ sinh đơn giản." },
-        { name: "Rổ nhựa tròn", desc: "Rổ nhựa tròn thoát nước nhanh, mắt rổ đều, bền chắc. Dùng rửa rau củ, đựng thực phẩm." },
-        { name: "Bình nước nhựa 2L", desc: "Bình nhựa 2L, nắp kín, không rò rỉ. Phù hợp đựng nước mát, trà, nước trái cây." },
-        { name: "Rổ nhựa vuông", desc: "Rổ vuông tiết kiệm diện tích, dễ xếp chồng. Dùng sơ chế, thoát nước thực phẩm." },
-        { name: "Ly nhựa trong suốt", desc: "Ly nhựa trong cao cấp, nhẹ, khó vỡ. Dùng cho nhà, quán cafe, tiệc tùng." },
-        { name: "Xô nhựa 5L", desc: "Xô nhựa dung tích 5L, có quai xách chắc chắn. Dùng xách nước, vệ sinh, làm vườn." },
-        { name: "Khay đá nhựa", desc: "Khay đổ đá nhựa mềm, dễ lấy đá. An toàn thực phẩm, phù hợp tủ đông gia đình." },
-        { name: "Rổ rá nhựa lớn", desc: "Bộ rổ rá cỡ lớn, đa năng trong bếp. Dùng vo gạo, rửa rau, để ráo." },
-        { name: "Hộp nhựa có nắp đậy", desc: "Hộp nhựa nắp kín, cất đồ gọn gàng. Dùng đựng đồ khô, đồ dùng linh tinh." }
-      ],
-      'khan-giay': [
-        { name: "Khăn giấy hộp 200 tờ", desc: "Khăn giấy hộp 200 tờ, giấy mịn, không bụi. Dùng lau tay, lau mặt, tiện dụng hằng ngày." },
-        { name: "Hộp khăn giấy nhựa", desc: "Hộp đựng khăn giấy bằng nhựa, bền, dễ lau chùi. Hạn chế bụi bẩn, phù hợp nhà hàng, gia đình." },
-        { name: "Khăn giấy cuộn lớn", desc: "Giấy cuộn lớn thấm hút tốt, bền, ít rách. Thích hợp bếp, vệ sinh, lau dọn nhanh." },
-        { name: "Khăn giấy ướt đóng gói", desc: "Khăn giấy ướt mềm dịu, hương nhẹ. Dùng vệ sinh cá nhân, an toàn cho da." },
-        { name: "Khăn giấy cao cấp 300 tờ", desc: "Giấy cao cấp 3 lớp, mịn, dai, thấm hút nhanh. Đóng hộp 300 tờ tiết kiệm." },
-        { name: "Khăn giấy văn phòng", desc: "Khăn giấy tiêu chuẩn văn phòng, trắng sạch, dễ rút. Phù hợp dùng chung khu vực làm việc." },
-        { name: "Khăn giấy siêu thấm", desc: "Công nghệ siêu thấm, lau khô nhanh, không để lại xơ. Hữu ích trong bếp và dọn dẹp." },
-        { name: "Khăn giấy đa lớp", desc: "Giấy đa lớp tăng độ bền và thấm hút. An toàn, đạt tiêu chuẩn vệ sinh." }
-      ]
-    };
+    let productData = null;
 
-    if (rawId && rawId.includes('-')) {
-      const separatorIndex = rawId.lastIndexOf('-');
-      const category = rawId.slice(0, separatorIndex);
-      const indexStr = rawId.slice(separatorIndex + 1);
-      const index = parseInt(indexStr, 10); // 1-based
-      const list = productDetails[category];
-      if (Array.isArray(list) && index >= 1 && index <= list.length) {
-        const item = list[index - 1];
-        const name = item.name;
-        document.getElementById("product-name").textContent = name;
-        document.getElementById("product-desc").textContent = item.desc;
-        document.getElementById("product-image").src = `images/${category}-${index}.jpg`;
-        document.getElementById("product-image").alt = name;
-        document.getElementById("product-price").textContent = "Giá: Liên hệ";
+    async function loadProductData() {
+      try {
+        const response = await fetch('products-data.html');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const dataScript = doc.getElementById('product-data');
+        if (!dataScript) {
+          throw new Error('Không tìm thấy thẻ dữ liệu');
+        }
+        return JSON.parse(dataScript.textContent);
+      } catch (error) {
+        console.error('Không thể tải dữ liệu sản phẩm:', error);
+        showMissingProduct("Không thể tải dữ liệu sản phẩm. Vui lòng thử lại sau.");
+        return null;
       }
     }
+
+    function findProductById(id) {
+      if (!productData || !productData.categories) return null;
+      for (const [categoryKey, items] of Object.entries(productData.categories)) {
+        const product = items.find(item => item.id === id);
+        if (product) {
+          return {
+            ...product,
+            categoryKey
+          };
+        }
+      }
+      return null;
+    }
+
+    function getCategoryLabel(categoryKey) {
+      if (!productData || !productData.meta || !productData.meta.categoryLabels) {
+        return '';
+      }
+      return productData.meta.categoryLabels[categoryKey] || '';
+    }
+
+    function showMissingProduct(message) {
+      const nameEl = document.getElementById("product-name");
+      const descEl = document.getElementById("product-desc");
+      const imgEl = document.getElementById("product-image");
+      const priceEl = document.getElementById("product-price");
+      const groupEl = document.getElementById("product-group");
+      nameEl.textContent = "Không tìm thấy sản phẩm";
+      descEl.textContent = message || "Sản phẩm có thể đã bị xóa hoặc đường dẫn không chính xác.";
+      priceEl.textContent = "Giá: Liên hệ";
+      groupEl.textContent = "Nhóm: Đang cập nhật";
+      imgEl.src = "images/placeholder.jpg";
+      imgEl.alt = "Không tìm thấy sản phẩm";
+    }
+
+    (async function init() {
+      if (!rawId) {
+        showMissingProduct("Thiếu mã sản phẩm trong đường dẫn.");
+        return;
+      }
+
+      productData = await loadProductData();
+      if (!productData) {
+        return;
+      }
+
+      const product = findProductById(rawId);
+      if (!product) {
+        showMissingProduct("Không tìm thấy sản phẩm với mã đã cung cấp.");
+        return;
+      }
+
+      const nameEl = document.getElementById("product-name");
+      const descEl = document.getElementById("product-desc");
+      const imgEl = document.getElementById("product-image");
+      const priceEl = document.getElementById("product-price");
+      const groupEl = document.getElementById("product-group");
+
+      nameEl.textContent = product.name;
+      descEl.textContent = product.description || "Đang cập nhật thông tin sản phẩm.";
+      imgEl.src = product.image || "images/placeholder.jpg";
+      imgEl.alt = product.name;
+      const priceText = product.price ? product.price : "Liên hệ";
+      priceEl.textContent = `Giá: ${priceText}`;
+      const categoryLabel = getCategoryLabel(product.categoryKey);
+      groupEl.textContent = categoryLabel ? `Nhóm: ${categoryLabel}` : "Nhóm: Đang cập nhật";
+      document.title = `${product.name} | Chi tiết sản phẩm`;
+    })();
   </script>
 </body>
 </html>

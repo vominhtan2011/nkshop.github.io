@@ -186,11 +186,12 @@
     }
     .card img{
       width:100%;
-      height:200px;
-      object-fit:cover;
+      height:auto;
+      aspect-ratio:4/3;
+      object-fit:contain;
       border-radius:12px;
       margin-bottom:12px;
-      background:linear-gradient(135deg,#f0f0f0,#e0e0e0);
+      background:#ffffff;
     }
     .card h3{
       margin:0 0 8px;
@@ -284,7 +285,7 @@
         <div class="logo">NK</div>
         <div class="brand-text">
           <h1>Shop Nhựa gia dụng & Khăn giấy</h1>
-          <p class="lead">Chuyên phân phối nhựa gia dụng, khăn giấy sỉ & lẻ, giao hàng toàn quốc</p>
+          <p class="lead">Chuyên phân phối sỉ & lẻ nhựa gia dụng, khăn giấy - Giao hàng toàn quốc</p>
         </div>
         <div class="cta">
           <a class="btn btn-phone" href="tel:0387404109">📞 0387 404 109</a>
@@ -303,9 +304,9 @@
 
     <section>
       <div class="tabs">
-        <button class="tab-btn active" onclick="showTab('noi-bat')">⭐ Nổi bật</button>
-        <button class="tab-btn" onclick="showTab('nhua')">🛍️ Sản phẩm nhựa</button>
-        <button class="tab-btn" onclick="showTab('khan-giay')">🧻 Khăn giấy</button>
+        <button class="tab-btn active" onclick="showTab(event,'noi-bat')">⭐ Nổi bật</button>
+        <button class="tab-btn" onclick="showTab(event,'nhua')">🛍️ Sản phẩm nhựa</button>
+        <button class="tab-btn" onclick="showTab(event,'khan-giay')">🧻 Khăn giấy</button>
       </div>
 
       <div id="noi-bat" class="tab-content active">
@@ -329,72 +330,71 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Dữ liệu sản phẩm
-    const products = {
-      'noi-bat': [
-        "Chậu nhựa đa năng 10L",
-        "Hộp nhựa đựng thực phẩm (set 3)",
-        "Khăn giấy hộp 200 tờ",
-        "Thau nhựa lớn",
-        "Khay nhựa đựng ly",
-        "Thùng rác nhựa nắp lật"
-      ],
-      'nhua': [
-        "Chậu nhựa đa năng 10L",
-        "Hộp nhựa đựng thực phẩm (set 3)",
-        "Thau nhựa lớn",
-        "Khay nhựa đựng ly",
-        "Ca nhựa 1L",
-        "Thùng rác nhựa nắp lật",
-        "Rổ nhựa tròn",
-        "Bình nước nhựa 2L",
-        "Rổ nhựa vuông",
-        "Ly nhựa trong suốt",
-        "Xô nhựa 5L",
-        "Khay đá nhựa",
-        "Rổ rá nhựa lớn",
-        "Hộp nhựa có nắp đậy"
-      ],
-      'khan-giay': [
-        "Khăn giấy hộp 200 tờ",
-        "Hộp khăn giấy nhựa",
-        "Khăn giấy cuộn lớn",
-        "Khăn giấy ướt đóng gói",
-        "Khăn giấy cao cấp 300 tờ",
-        "Khăn giấy văn phòng",
-        "Khăn giấy siêu thấm",
-        "Khăn giấy đa lớp"
-      ]
-    };
+    let productData = null;
 
-    // Hàm tạo card sản phẩm
-    function createProductCard(product, index, category) {
-      const imgIndex = (category === 'noi-bat' ? index : 
-                       category === 'nhua' ? index + 10 : 
-                       index + 20) % 30;
+    async function loadProductData() {
+      try {
+        const response = await fetch('products-data.html');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const dataScript = doc.getElementById('product-data');
+        if (!dataScript) {
+          throw new Error('Không tìm thấy thẻ dữ liệu');
+        }
+        return JSON.parse(dataScript.textContent);
+      } catch (error) {
+        console.error('Không thể tải dữ liệu sản phẩm:', error);
+        showDataError();
+        return null;
+      }
+    }
+
+    function showDataError() {
+      document.querySelectorAll('.grid').forEach(grid => {
+        grid.innerHTML = `
+          <div style="grid-column:1/-1;padding:24px;text-align:center;color:#c0392b;">
+            Không thể tải dữ liệu sản phẩm. Vui lòng thử lại sau.
+          </div>
+        `;
+      });
+    }
+
+    function createProductCard(product) {
+      const priceText = product.price ? product.price : 'Liên hệ';
       return `
         <div class="card">
-          <img src="images/${category}-${index+1}.jpg" alt="${product}" loading="lazy">
-          <h3><a href="product-detail.html?id=${category}-${index+1}">${product}</a></h3>
-          <div class="price">Giá: Liên hệ</div>
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <h3><a href="product-detail.html?id=${product.id}">${product.name}</a></h3>
+          <div class="price">Giá: ${priceText}</div>
         </div>
       `;
     }
 
-    // Render sản phẩm cho từng tab
     function renderProducts() {
-      Object.keys(products).forEach(category => {
-        const grid = document.getElementById(`grid-${category}`);
-        if (grid) {
-          grid.innerHTML = products[category].map((product, index) => 
-            createProductCard(product, index, category)
-          ).join('');
+      if (!productData || !productData.categories) {
+        return;
+      }
+      Object.entries(productData.categories).forEach(([categoryKey, items]) => {
+        const grid = document.getElementById(`grid-${categoryKey}`);
+        if (!grid) return;
+        if (!Array.isArray(items) || items.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column:1/-1;padding:24px;text-align:center;color:#666;">
+              Đang cập nhật sản phẩm cho nhóm này.
+            </div>
+          `;
+          return;
         }
+        grid.innerHTML = items.map(item => createProductCard(item)).join('');
       });
     }
 
     // Hàm chuyển tab
-    function showTab(tabId) {
+    function showTab(event, tabId) {
       // Ẩn tất cả tab content
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -409,11 +409,18 @@
       document.getElementById(tabId).classList.add('active');
       
       // Thêm active class cho button tương ứng
-      event.target.classList.add('active');
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+      }
     }
 
     // Khởi tạo
-    renderProducts();
+    (async function init() {
+      productData = await loadProductData();
+      if (productData) {
+        renderProducts();
+      }
+    })();
   </script>
 </body>
 </html>
