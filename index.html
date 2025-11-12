@@ -369,9 +369,7 @@
     }
 
     function renderProducts() {
-      if (!productData || !productData.categories) {
-        return;
-      }
+      if (!productData || !productData.categories) return;
       Object.entries(productData.categories).forEach(([categoryKey, items]) => {
         const grid = document.getElementById(`grid-${categoryKey}`);
         if (!grid) return;
@@ -388,31 +386,32 @@
     }
 
     function showTab(event, tabId) {
+      if (event) {
+        event.preventDefault();
+      }
+
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
       });
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
       });
+
       document.getElementById(tabId).classList.add('active');
-      const targetButton = event && event.currentTarget
-        ? event.currentTarget
-        : document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+      const targetButton = event?.currentTarget || document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
       if (targetButton) {
         targetButton.classList.add('active');
       }
+
       if (event) {
-        window.location.hash = tabId;
+        history.replaceState(null, null, '#' + tabId);
       }
     }
 
     function applyHashTab() {
       const hash = window.location.hash.replace('#', '');
       if (!hash) return;
-      const targetSection = document.getElementById(hash);
-      if (!targetSection) return;
       showTab(null, hash);
-      // Bỏ scrollIntoView để tránh cuộn tự động
     }
 
     (async function init() {
@@ -422,8 +421,6 @@
         applyHashTab();
       }
     })();
-
-    window.addEventListener('hashchange', () => applyHashTab());
   </script>
 </body>
 </html>
