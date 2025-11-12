@@ -240,11 +240,9 @@
       const descEl = document.getElementById("product-desc");
       const imgEl = document.getElementById("product-image");
       const priceEl = document.getElementById("product-price");
-      const groupEl = document.getElementById("product-group");
       nameEl.textContent = "Không tìm thấy sản phẩm";
       descEl.textContent = message || "Sản phẩm có thể đã bị xóa hoặc đường dẫn không chính xác.";
       priceEl.textContent = "Giá: Liên hệ";
-      groupEl.textContent = "Nhóm: Đang cập nhật";
       imgEl.src = "images/placeholder.jpg";
       imgEl.alt = "Không tìm thấy sản phẩm";
     }
@@ -279,7 +277,6 @@
       const priceText = product.price ? product.price : "Liên hệ";
       priceEl.textContent = `Giá: ${priceText}`;
       const categoryLabel = getCategoryLabel(product.categoryKey);
-      groupEl.textContent = categoryLabel ? `Nhóm: ${categoryLabel}` : "Nhóm: Đang cập nhật";
       document.title = `${product.name} | Chi tiết sản phẩm`;
     })();
   </script>
