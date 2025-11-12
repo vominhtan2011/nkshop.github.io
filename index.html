@@ -277,39 +277,37 @@
     @media (max-width:880px){
       header{padding:12px 16px}
       
-      /* PHẦN ĐÃ CHỈNH SỬA: Thay đổi layout header từ column sang row */
+      /* PHẦN ĐÃ CHỈNH SỬA: Căn mọi thứ về lề trái */
       .brand{
-        flex-direction:row; /* Chuyển thành hàng ngang */
-        align-items:left;
-        text-align:left; /* Đặt text về bên trái logo */
+        flex-direction:row; 
+        align-items:center;
+        text-align:left; 
         gap:10px;
-        flex-wrap: nowrap; /* Ngăn không cho chữ xuống hàng nếu đủ chỗ */
-        justify-content: flex-start; /* Căn lề trái */
+        flex-wrap: nowrap; 
+        justify-content: flex-start; /* GIỮ NGUYÊN để căn lề trái */
       }
       
-      /* Đảm bảo khung text không bị giới hạn */
+      /* CĂN LỀ TRÁI CỤ THỂ CHO KHỐI CHỮ */
       .brand-text {
-        flex-grow: 1; /* Cho phép phần chữ chiếm hết không gian còn lại */
+        flex-grow: 1; 
+        text-align: left; /* Đảm bảo chữ căn lề trái */
+      }
+      .brand-text h1{
+        font-size:18px;
+        margin:0;
+      }
+      .brand-text p.lead{
+        font-size:12px;
+        margin:4px 0 0;
       }
 
       .logo{
         width:40px;
         height:40px;
         font-size:16px;
-        /* Loại bỏ border nếu cần, giữ nguyên như cũ để không làm thay đổi thiết kế logo */
-      }
-      .brand-text h1{
-        font-size:18px;
-        margin:0;
-        /* Giữ nguyên như cũ */
-      }
-      .brand-text p.lead{
-        font-size:12px;
-        margin:4px 0 0;
-        /* Giữ nguyên như cũ */
       }
       
-      .cta{ /* Ẩn cta cũ nếu nó còn tồn tại */
+      .cta{ 
         display: none;
       }
       .btn{
