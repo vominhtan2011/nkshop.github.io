@@ -311,19 +311,20 @@
         font-size:12px;
       }
       
-      /* --- CHỈNH SỬA CHO 3 TAB SẢN PHẨM NẰM TRÊN 1 DÒNG (CUỘN NGANG) --- */
+      /* --- CHỈNH SỬA CHO 3 TAB SẢN PHẨM NẰM TRÊN 1 DÒNG VÀ LUÔN HIỆN ĐỦ --- */
       .tabs{
-        flex-direction:row; /* Đổi thành row để nằm trên 1 dòng */
-        flex-wrap: nowrap; /* Ngăn chặn xuống dòng */
-        overflow-x: auto; /* Cho phép cuộn ngang nếu không đủ chỗ */
-        padding: 6px; /* Giảm padding cho mobile */
-        justify-content: flex-start; /* Căn tab về bên trái */
+        flex-direction:row;
+        flex-wrap: nowrap;
+        overflow-x: hidden; /* Quan trọng: Ngăn cuộn ngang */
+        gap: 6px; /* Giảm khoảng cách giữa các tab */
+        padding: 6px; /* Giảm padding của khối tabs */
+        justify-content: space-between; /* Đảm bảo các tab trải đều */
       }
       .tab-btn{
-        min-width: fit-content; /* Cho nút co lại theo nội dung */
-        width: auto; /* Bỏ width: 100% */
-        padding: 10px 14px; /* Giảm padding cho nhỏ gọn */
-        flex-shrink: 0; /* Ngăn các nút bị bóp quá mức */
+        flex: 1 1 0%; /* Quan trọng: Chia đều không gian, co lại và override min-width */
+        min-width: 0; /* Vô hiệu hóa min-width 150px của desktop */
+        padding: 10px 8px; /* Giảm padding bên trong tab */
+        font-size: 13px; /* Giảm font-size cho phù hợp với mobile */
       }
       /* --- KẾT THÚC CHỈNH SỬA TAB --- */
       
@@ -365,7 +366,7 @@
     <section>
       <div class="tabs">
         <button class="tab-btn active" data-tab="noi-bat" onclick="showTab(event,'noi-bat')">⭐ Nổi bật</button>
-        <button class="tab-btn" data-tab="nhua" onclick="showTab(event,'nhua')">🛍️ Đồ nhựa</button>
+        <button class="tab-btn" data-tab="nhua" onclick="showTab(event,'nhua')">🛍️ Sản phẩm nhựa</button>
         <button class="tab-btn" data-tab="khan-giay" onclick="showTab(event,'khan-giay')">🧻 Khăn giấy</button>
       </div>
 
