@@ -304,9 +304,9 @@
 
     <section>
       <div class="tabs">
-        <button class="tab-btn active" onclick="showTab(event,'noi-bat')">⭐ Nổi bật</button>
-        <button class="tab-btn" onclick="showTab(event,'nhua')">🛍️ Sản phẩm nhựa</button>
-        <button class="tab-btn" onclick="showTab(event,'khan-giay')">🧻 Khăn giấy</button>
+        <button class="tab-btn active" data-tab="noi-bat" onclick="showTab(event,'noi-bat')">⭐ Nổi bật</button>
+        <button class="tab-btn" data-tab="nhua" onclick="showTab(event,'nhua')">🛍️ Sản phẩm nhựa</button>
+        <button class="tab-btn" data-tab="khan-giay" onclick="showTab(event,'khan-giay')">🧻 Khăn giấy</button>
       </div>
 
       <div id="noi-bat" class="tab-content active">
@@ -409,8 +409,26 @@
       document.getElementById(tabId).classList.add('active');
       
       // Thêm active class cho button tương ứng
-      if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
+      const targetButton = event && event.currentTarget
+        ? event.currentTarget
+        : document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+      if (targetButton) {
+        targetButton.classList.add('active');
+      }
+
+      if (event) {
+        window.location.hash = tabId;
+      }
+    }
+
+    function applyHashTab(scrollIntoView = false) {
+      const hash = window.location.hash.replace('#', '');
+      if (!hash) return;
+      const targetSection = document.getElementById(hash);
+      if (!targetSection) return;
+      showTab(null, hash);
+      if (scrollIntoView) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
@@ -419,8 +437,11 @@
       productData = await loadProductData();
       if (productData) {
         renderProducts();
+        applyHashTab();
       }
     })();
+
+    window.addEventListener('hashchange', () => applyHashTab(true));
   </script>
 </body>
 </html>
