@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Shop Nhựa gia dụng & Khăn giấy</title>
+  <meta name="description" content="Phân phối sỉ & lẻ nhựa gia dụng, khăn giấy — giao nhanh, giá tốt. Liên hệ: 0387 404 109 (Zalo)">
+  <style>
+    :root{
+      --accent:#0b78d1;
+      --accent-dark:#095fa8;
+      --muted:#666;
+      --bg:#fff;
+      --border:#eee;
+      --shadow:0 2px 8px rgba(0,0,0,0.08);
+      --shadow-hover:0 4px 16px rgba(0,0,0,0.12);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+      margin:0;
+      color:#111;
+      background:linear-gradient(to bottom,#f8f9fa,#ffffff);
+      line-height:1.6;
+    }
+    header{
+      background:linear-gradient(135deg,#0b78d1 0%,#4bb6ff 100%);
+      padding:8px 18px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .container{max-width:1200px;margin:0 auto;padding:0 18px}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+    .logo{
+      width:50px;
+      height:50px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.2);
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-size:18px;
+      border:2px solid rgba(255,255,255,0.3);
+    }
+    .brand-text h1{
+      margin:0;
+      font-size:20px;
+      color:white;
+      font-weight:600;
+    }
+    .brand-text p.lead{
+      margin:2px 0 0;
+      color:rgba(255,255,255,0.9);
+      font-size:13px;
+    }
+    .cta{
+      margin-left:auto;
+      display:flex;
+      gap:12px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 16px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      transition:all 0.3s ease;
+      font-size:13px;
+    }
+    .btn-phone{
+      background:rgba(255,255,255,0.95);
+      color:var(--accent);
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    .btn-phone:hover{
+      background:white;
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-zalo{
+      background:#0068ff;
+      color:#fff;
+      box-shadow:0 2px 8px rgba(0,104,255,0.3);
+    }
+    .btn-zalo:hover{
+      background:#0052cc;
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(0,104,255,0.4);
+    }
+    .hero{
+      padding:40px 0;
+      text-align:center;
+      background:white;
+      margin:20px 0;
+      border-radius:16px;
+      box-shadow:var(--shadow);
+    }
+    .hero h2{
+      font-size:32px;
+      margin:0 0 12px;
+      color:#1a1a1a;
+      font-weight:600;
+    }
+    .hero p{
+      color:var(--muted);
+      margin:0;
+      font-size:16px;
+      max-width:700px;
+      margin:0 auto;
+    }
+    .tabs{
+      display:flex;
+      gap:8px;
+      margin:30px 0 24px;
+      background:white;
+      padding:8px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      flex-wrap:wrap;
+    }
+    .tab-btn{
+      flex:1;
+      min-width:150px;
+      padding:14px 20px;
+      background:transparent;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:600;
+      color:var(--muted);
+      transition:all 0.3s ease;
+      position:relative;
+    }
+    .tab-btn:hover{
+      background:#f0f4f8;
+      color:var(--accent);
+    }
+    .tab-btn.active{
+      background:linear-gradient(135deg,var(--accent),#4bb6ff);
+      color:white;
+      box-shadow:0 2px 8px rgba(11,120,209,0.3);
+    }
+    .tab-content{
+      display:none;
+      animation:fadeIn 0.4s ease;
+    }
+    .tab-content.active{
+      display:block;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+      gap:20px;
+      margin-bottom:40px;
+    }
+    .card{
+      background:#fff;
+      border-radius:16px;
+      padding:16px;
+      border:1px solid #eee;
+      transition:all 0.3s ease;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:var(--shadow-hover);
+      border-color:var(--accent);
+    }
+    .card img{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:12px;
+      background:linear-gradient(135deg,#f0f0f0,#e0e0e0);
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-size:16px;
+      font-weight:600;
+      line-height:1.4;
+    }
+    .card h3 a{
+      text-decoration:none;
+      color:#1a1a1a;
+      transition:color 0.3s;
+    }
+    .card h3 a:hover{
+      color:var(--accent);
+    }
+    .price{
+      color:var(--accent);
+      font-weight:700;
+      font-size:15px;
+      margin:8px 0;
+    }
+    .card-actions{
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid #f0f0f0;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .card-actions a{
+      flex:1;
+      text-align:center;
+      padding:8px 12px;
+      background:#f8f9fa;
+      border-radius:8px;
+      text-decoration:none;
+      color:#555;
+      font-size:13px;
+      transition:all 0.3s;
+      font-weight:500;
+    }
+    .card-actions a:hover{
+      background:var(--accent);
+      color:white;
+      transform:translateY(-2px);
+    }
+    footer{
+      margin-top:50px;
+      text-align:center;
+      color:var(--muted);
+      padding:8px 20px;
+      background:white;
+      border-top:1px solid var(--border);
+      border-radius:16px 16px 0 0;
+      box-shadow:0 -2px 10px rgba(0,0,0,0.05);
+    }
+    footer a{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+    }
+    footer a:hover{
+      text-decoration:underline;
+    }
+    @media (max-width:880px){
+      .cta{
+        margin-left:0;
+        width:100%;
+        justify-content:center;
+      }
+      .tabs{
+        flex-direction:column;
+      }
+      .tab-btn{
+        width:100%;
+      }
+      .grid{
+        grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+        gap:14px;
+      }
+      .hero h2{
+        font-size:24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo">NK</div>
+        <div class="brand-text">
+          <h1>Shop Nhựa gia dụng & Khăn giấy</h1>
+          <p class="lead">Chuyên phân phối nhựa gia dụng, khăn giấy sỉ & lẻ, giao hàng toàn quốc</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn-phone" href="tel:0387404109">📞 0387 404 109</a>
+          <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">💬 Zalo</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+  <!-- Phần giới thiệu chính ở đầu trang
+    <section class="hero">
+      <h2>Chuyên phân phối: Nhựa gia dụng & Khăn giấy</h2>
+      <p>Chúng tôi cung cấp đa dạng sản phẩm chất lượng với giá sỉ, giao nhanh, hỗ trợ đặt hàng số lượng lớn.</p>
+    </section> -->
+
+    <section>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('noi-bat')">⭐ Nổi bật</button>
+        <button class="tab-btn" onclick="showTab('nhua')">🛍️ Sản phẩm nhựa</button>
+        <button class="tab-btn" onclick="showTab('khan-giay')">🧻 Khăn giấy</button>
+      </div>
+
+      <div id="noi-bat" class="tab-content active">
+        <div class="grid" id="grid-noi-bat"></div>
+      </div>
+
+      <div id="nhua" class="tab-content">
+        <div class="grid" id="grid-nhua"></div>
+      </div>
+
+      <div id="khan-giay" class="tab-content">
+        <div class="grid" id="grid-khan-giay"></div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Sản Phẩm Nhựa & Khăn Giấy
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Dữ liệu sản phẩm
+    const products = {
+      'noi-bat': [
+        "Chậu nhựa đa năng 10L",
+        "Hộp nhựa đựng thực phẩm (set 3)",
+        "Khăn giấy hộp 200 tờ",
+        "Thau nhựa lớn",
+        "Khay nhựa đựng ly",
+        "Thùng rác nhựa nắp lật"
+      ],
+      'nhua': [
+        "Chậu nhựa đa năng 10L",
+        "Hộp nhựa đựng thực phẩm (set 3)",
+        "Thau nhựa lớn",
+        "Khay nhựa đựng ly",
+        "Ca nhựa 1L",
+        "Thùng rác nhựa nắp lật",
+        "Rổ nhựa tròn",
+        "Bình nước nhựa 2L",
+        "Rổ nhựa vuông",
+        "Ly nhựa trong suốt",
+        "Xô nhựa 5L",
+        "Khay đá nhựa",
+        "Rổ rá nhựa lớn",
+        "Hộp nhựa có nắp đậy"
+      ],
+      'khan-giay': [
+        "Khăn giấy hộp 200 tờ",
+        "Hộp khăn giấy nhựa",
+        "Khăn giấy cuộn lớn",
+        "Khăn giấy ướt đóng gói",
+        "Khăn giấy cao cấp 300 tờ",
+        "Khăn giấy văn phòng",
+        "Khăn giấy siêu thấm",
+        "Khăn giấy đa lớp"
+      ]
+    };
+
+    // Hàm tạo card sản phẩm
+    function createProductCard(product, index, category) {
+      const imgIndex = (category === 'noi-bat' ? index : 
+                       category === 'nhua' ? index + 10 : 
+                       index + 20) % 30;
+      return `
+        <div class="card">
+          <img src="images/${category}-${index+1}.jpg" alt="${product}" loading="lazy">
+          <h3><a href="product-detail.html?id=${category}-${index+1}">${product}</a></h3>
+          <div class="price">Giá: Liên hệ</div>
+        </div>
+      `;
+    }
+
+    // Render sản phẩm cho từng tab
+    function renderProducts() {
+      Object.keys(products).forEach(category => {
+        const grid = document.getElementById(`grid-${category}`);
+        if (grid) {
+          grid.innerHTML = products[category].map((product, index) => 
+            createProductCard(product, index, category)
+          ).join('');
+        }
+      });
+    }
+
+    // Hàm chuyển tab
+    function showTab(tabId) {
+      // Ẩn tất cả tab content
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Xóa active class từ tất cả button
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Hiển thị tab được chọn
+      document.getElementById(tabId).classList.add('active');
+      
+      // Thêm active class cho button tương ứng
+      event.target.classList.add('active');
+    }
+
+    // Khởi tạo
+    renderProducts();
+  </script>
+</body>
+</html>

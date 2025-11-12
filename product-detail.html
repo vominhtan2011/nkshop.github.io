@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chi tiết sản phẩm | Shop Nhựa gia dụng & Khăn giấy</title>
+  <meta name="description" content="Xem thông tin chi tiết sản phẩm nhựa gia dụng & khăn giấy. Liên hệ: 0387 404 109 (Zalo)">
+  <style>
+    :root{
+      --accent:#0b78d1;
+      --accent-dark:#095fa8;
+      --muted:#666;
+      --bg:#fff;
+      --border:#eee;
+      --shadow:0 2px 8px rgba(0,0,0,0.08);
+      --shadow-hover:0 4px 16px rgba(0,0,0,0.12);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+      margin:0;
+      color:#111;
+      background:linear-gradient(to bottom,#f8f9fa,#ffffff);
+      line-height:1.6;
+    }
+    header{
+      background:linear-gradient(135deg,#0b78d1 0%,#4bb6ff 100%);
+      padding:8px 18px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .container{max-width:1200px;margin:0 auto;padding:0 18px}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+    .logo{
+      width:50px;
+      height:50px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.2);
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-size:18px;
+      border:2px solid rgba(255,255,255,0.3);
+    }
+    .brand-text h1{
+      margin:0;
+      font-size:20px;
+      color:white;
+      font-weight:600;
+    }
+    .brand-text p.lead{
+      margin:2px 0 0;
+      color:rgba(255,255,255,0.9);
+      font-size:13px;
+    }
+    .cta{
+      margin-left:auto;
+      display:flex;
+      gap:12px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 16px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      transition:all 0.3s ease;
+      font-size:13px;
+    }
+    .btn-phone{
+      background:rgba(255,255,255,0.95);
+      color:var(--accent);
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    .btn-phone:hover{
+      background:white;
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-zalo{
+      background:#0068ff;
+      color:#fff;
+      box-shadow:0 2px 8px rgba(0,104,255,0.3);
+    }
+    .btn-zalo:hover{
+      background:#0052cc;
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(0,104,255,0.4);
+    }
+    a { text-decoration:none; color:var(--accent); }
+    h1,h2,h3 { margin:0; }
+
+    .product-detail {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      padding:30px 0;
+    }
+    .product-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .product-detail img {
+      width:100%;
+      border-radius:12px;
+      border:1px solid #eee;
+      object-fit:cover;
+      height:420px;
+      background:linear-gradient(135deg,#f0f0f0,#e0e0e0);
+    }
+    .info h2 { font-size:24px; margin-bottom:10px; }
+    .price { color:var(--accent); font-weight:700; font-size:18px; margin:8px 0; }
+    .actions { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
+
+    footer{
+      margin-top:50px;
+      text-align:center;
+      color:var(--muted);
+      padding:8px 20px;
+      background:white;
+      border-top:1px solid var(--border);
+      border-radius:16px 16px 0 0;
+      box-shadow:0 -2px 10px rgba(0,0,0,0.05);
+      font-size:14px;
+    }
+    @media (max-width:768px) {
+      .product-detail { grid-template-columns:1fr; }
+      .product-detail img { height:300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo">NK</div>
+        <div class="brand-text">
+          <h1>Shop Nhựa gia dụng & Khăn giấy</h1>
+          <p class="lead">Chuyên phân phối nhựa gia dụng, khăn giấy sỉ & lẻ, giao hàng toàn quốc</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn-phone" href="index.html">← Trang chủ</a>
+          <a class="btn btn-phone" href="tel:0387404109">📞 0387 404 109</a>
+          <a class="btn btn-zalo" href="https://zalo.me/0387404109" target="_blank">💬 Zalo</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="product-detail">
+      <div class="product-card">
+        <img id="product-image" src="images/placeholder.jpg" alt="Sản phẩm">
+      </div>
+      <div class="product-card">
+        <div class="info">
+          <h2 id="product-name">Tên sản phẩm</h2>
+          <div class="price" id="product-price">Giá: Liên hệ</div>
+          <p id="product-desc">Mô tả chi tiết sản phẩm sẽ được hiển thị tại đây: chất liệu, kích thước, công dụng, và thông tin thêm.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Sản Phẩm Nhựa & Khăn Giấy
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lấy ID sản phẩm từ URL (định dạng: category-index), ví dụ: nhua-3
+    const params = new URLSearchParams(window.location.search);
+    const rawId = params.get('id'); // ví dụ "nhua-3"
+
+    // Dữ liệu chi tiết cho từng sản phẩm (đồng bộ tên với index.html)
+    const productDetails = {
+      'noi-bat': [
+        { name: "Chậu nhựa đa năng 10L", desc: "Chậu nhựa dung tích 10L, chất liệu PP bền, dày dặn. Phù hợp giặt giũ, rửa rau củ, vệ sinh nhà cửa. Chịu nhiệt tốt, dễ vệ sinh, không ám mùi." },
+        { name: "Hộp nhựa đựng thực phẩm (set 3)", desc: "Bộ 3 hộp nhựa an toàn thực phẩm, nắp kín chống tràn. Dùng được tủ lạnh, lò vi sóng (không nắp). Thích hợp bảo quản cơm, canh, trái cây." },
+        { name: "Khăn giấy hộp 200 tờ", desc: "Khăn giấy mềm mịn, thấm hút tốt, an toàn cho da. Đóng hộp 200 tờ tiện dụng, phù hợp gia đình và văn phòng." },
+        { name: "Thau nhựa lớn", desc: "Thau nhựa kích thước lớn, vành dày chắc chắn. Phù hợp ngâm giặt, chứa đồ đa mục đích. Nhựa bền, màu sắc tươi sáng." },
+        { name: "Khay nhựa đựng ly", desc: "Khay nhựa chia ngăn gọn gàng, chuyên đựng ly/chén. Dễ vệ sinh, nhẹ, bền, phù hợp quán ăn và gia đình." },
+        { name: "Thùng rác nhựa nắp lật", desc: "Thùng rác nhựa thiết kế nắp lật chống mùi. Dùng trong phòng khách, bếp hoặc văn phòng. Chất liệu bền, màu sắc trang nhã." }
+      ],
+      'nhua': [
+        { name: "Chậu nhựa đa năng 10L", desc: "Chậu nhựa PP 10L, thành dày, chịu lực tốt. Dùng cho sinh hoạt gia đình, nhà hàng, công việc vệ sinh." },
+        { name: "Hộp nhựa đựng thực phẩm (set 3)", desc: "Set 3 hộp kích cỡ khác nhau, nắp khóa kín. Dùng bảo quản đồ khô/ướt, tiện mang theo." },
+        { name: "Thau nhựa lớn", desc: "Thau nhựa dung tích lớn, chống trơn trượt. Dùng ngâm, giặt, rửa rau củ số lượng nhiều." },
+        { name: "Khay nhựa đựng ly", desc: "Khay nhựa chia ô, sắp xếp ly gọn gàng, thoát nước tốt. Hạn chế trầy xước ly chén." },
+        { name: "Ca nhựa 1L", desc: "Ca nhựa dung tích 1L, có vạch đo, tay cầm chắc chắn. Dùng rót nước, pha chế, nấu ăn." },
+        { name: "Thùng rác nhựa nắp lật", desc: "Thùng rác nắp lật êm, hạn chế mùi. Dễ tháo lắp túi rác, vệ sinh đơn giản." },
+        { name: "Rổ nhựa tròn", desc: "Rổ nhựa tròn thoát nước nhanh, mắt rổ đều, bền chắc. Dùng rửa rau củ, đựng thực phẩm." },
+        { name: "Bình nước nhựa 2L", desc: "Bình nhựa 2L, nắp kín, không rò rỉ. Phù hợp đựng nước mát, trà, nước trái cây." },
+        { name: "Rổ nhựa vuông", desc: "Rổ vuông tiết kiệm diện tích, dễ xếp chồng. Dùng sơ chế, thoát nước thực phẩm." },
+        { name: "Ly nhựa trong suốt", desc: "Ly nhựa trong cao cấp, nhẹ, khó vỡ. Dùng cho nhà, quán cafe, tiệc tùng." },
+        { name: "Xô nhựa 5L", desc: "Xô nhựa dung tích 5L, có quai xách chắc chắn. Dùng xách nước, vệ sinh, làm vườn." },
+        { name: "Khay đá nhựa", desc: "Khay đổ đá nhựa mềm, dễ lấy đá. An toàn thực phẩm, phù hợp tủ đông gia đình." },
+        { name: "Rổ rá nhựa lớn", desc: "Bộ rổ rá cỡ lớn, đa năng trong bếp. Dùng vo gạo, rửa rau, để ráo." },
+        { name: "Hộp nhựa có nắp đậy", desc: "Hộp nhựa nắp kín, cất đồ gọn gàng. Dùng đựng đồ khô, đồ dùng linh tinh." }
+      ],
+      'khan-giay': [
+        { name: "Khăn giấy hộp 200 tờ", desc: "Khăn giấy hộp 200 tờ, giấy mịn, không bụi. Dùng lau tay, lau mặt, tiện dụng hằng ngày." },
+        { name: "Hộp khăn giấy nhựa", desc: "Hộp đựng khăn giấy bằng nhựa, bền, dễ lau chùi. Hạn chế bụi bẩn, phù hợp nhà hàng, gia đình." },
+        { name: "Khăn giấy cuộn lớn", desc: "Giấy cuộn lớn thấm hút tốt, bền, ít rách. Thích hợp bếp, vệ sinh, lau dọn nhanh." },
+        { name: "Khăn giấy ướt đóng gói", desc: "Khăn giấy ướt mềm dịu, hương nhẹ. Dùng vệ sinh cá nhân, an toàn cho da." },
+        { name: "Khăn giấy cao cấp 300 tờ", desc: "Giấy cao cấp 3 lớp, mịn, dai, thấm hút nhanh. Đóng hộp 300 tờ tiết kiệm." },
+        { name: "Khăn giấy văn phòng", desc: "Khăn giấy tiêu chuẩn văn phòng, trắng sạch, dễ rút. Phù hợp dùng chung khu vực làm việc." },
+        { name: "Khăn giấy siêu thấm", desc: "Công nghệ siêu thấm, lau khô nhanh, không để lại xơ. Hữu ích trong bếp và dọn dẹp." },
+        { name: "Khăn giấy đa lớp", desc: "Giấy đa lớp tăng độ bền và thấm hút. An toàn, đạt tiêu chuẩn vệ sinh." }
+      ]
+    };
+
+    if (rawId && rawId.includes('-')) {
+      const separatorIndex = rawId.lastIndexOf('-');
+      const category = rawId.slice(0, separatorIndex);
+      const indexStr = rawId.slice(separatorIndex + 1);
+      const index = parseInt(indexStr, 10); // 1-based
+      const list = productDetails[category];
+      if (Array.isArray(list) && index >= 1 && index <= list.length) {
+        const item = list[index - 1];
+        const name = item.name;
+        document.getElementById("product-name").textContent = name;
+        document.getElementById("product-desc").textContent = item.desc;
+        document.getElementById("product-image").src = `images/${category}-${index}.jpg`;
+        document.getElementById("product-image").alt = name;
+        document.getElementById("product-price").textContent = "Giá: Liên hệ";
+      }
+    }
+  </script>
+</body>
+</html>
